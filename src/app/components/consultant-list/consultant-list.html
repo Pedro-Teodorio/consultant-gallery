@@ -1,0 +1,12 @@
+<div class="flex flex-col gap-4">
+  <app-filter-toolbar
+    (selectedExpertiseChange)="onFilterExpertiseChange($event)"
+    [expertise]="expertiseList"
+  ></app-filter-toolbar>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (item of filteredConsultants; track $index) {
+    <app-consultant-card [consultant]="item"></app-consultant-card>
+    }
+  </div>
+</div>

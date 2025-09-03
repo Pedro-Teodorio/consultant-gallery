@@ -1,59 +1,83 @@
-# ConsultantGallery
+# 🖼️ Consultant Gallery
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+Bem-vindo ao Consultant Gallery! Este projeto é uma galeria de consultores construída com Angular e TailwindCSS, focada em exibir perfis de consultores de forma moderna e responsiva.
 
-## Development server
+## 🚀 Começando
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Siga os passos abaixo para rodar o projeto localmente:
 
 ```bash
-ng generate component component-name
+npm install
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Acesse em: http://localhost:4200
 
-```bash
-ng generate --help
+## 🧩 Estrutura do Projeto
+
+```
+consultant-gallery/
+├── angular.json
+├── package.json
+├── tailwind.config.js
+├── tsconfig*.json
+├── public/
+│   └── favicon.ico
+├── src/
+│   ├── index.html
+│   ├── main.ts
+│   ├── styles.css
+│   └── app/
+│       ├── app.config.ts
+│       ├── app.css
+│       ├── app.html
+│       ├── app.spec.ts
+│       ├── app.ts
+│       ├── components/
+│       │   ├── consultant-card/
+│       │   ├── consultant-list/
+│       │   └── filter-toolbar/
+│       ├── models/
+│       │   └── consultant.model.ts
+│       └── services/
+│           └── consultant.ts
 ```
 
-## Building
+## 🛠️ Tecnologias Utilizadas
 
-To build the project run:
+- Angular
+- TailwindCSS
+- TypeScript
+- Lucide Icons
 
-```bash
-ng build
-```
+## 📦 Scripts Disponíveis
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- `npm start` — Inicia o servidor de desenvolvimento
+- `npm test` — Executa os testes unitários
 
-## Running unit tests
+## 🧑‍💻 Componentes
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Consultant Card**: Exibe informações individuais do consultor
+- **Consultant List**: Lista todos os consultores
+- **Filter Toolbar**: Ferramenta para filtrar consultores
 
-```bash
-ng test
-```
+## 📚 Modelos & Serviços
 
-## Running end-to-end tests
+- **consultant.model.ts**: Define a estrutura dos dados do consultor
+- **consultant.service.ts**: Gerencia a lógica de acesso aos dados dos consultores
 
-For end-to-end (e2e) testing, run:
+## 📝 Testes
 
-```bash
-ng e2e
-```
+Os testes unitários estão localizados nos arquivos `*.spec.ts` dentro de cada componente e serviço.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🎨 Estilo
 
-## Additional Resources
+O projeto utiliza TailwindCSS para estilização rápida e responsiva.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 💡 Contribuição
+
+Sinta-se à vontade para abrir issues ou enviar pull requests!
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
