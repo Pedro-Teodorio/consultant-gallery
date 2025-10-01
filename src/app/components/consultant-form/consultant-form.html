@@ -1,0 +1,137 @@
+<div class="container mx-auto px-4 py-8 max-w-3xl">
+  <h1 class="text-3xl font-bold mb-6">
+    {{ isEditMode ? 'Editar Consultor' : 'Adicionar Novo Consultor' }}
+  </h1>
+
+  <form [formGroup]="consultantForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Nome -->
+      <div class="col-span-2">
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Nome completo do consultor"
+        />
+        <div *ngIf="consultantForm.get('name')?.invalid && consultantForm.get('name')?.touched" class="text-red-500 text-sm mt-1">
+          O nome é obrigatório e deve ter pelo menos 3 caracteres.
+        </div>
+      </div>
+
+      <!-- Título -->
+      <div class="col-span-2">
+        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Título *</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Título profissional"
+        />
+        <div *ngIf="consultantForm.get('title')?.invalid && consultantForm.get('title')?.touched" class="text-red-500 text-sm mt-1">
+          O título é obrigatório e deve ter pelo menos 5 caracteres.
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="col-span-2">
+        <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">Biografia *</label>
+        <textarea
+          id="bio"
+          formControlName="bio"
+          rows="4"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Descrição detalhada do consultor"
+        ></textarea>
+        <div *ngIf="consultantForm.get('bio')?.invalid && consultantForm.get('bio')?.touched" class="text-red-500 text-sm mt-1">
+          A biografia é obrigatória e deve ter pelo menos 10 caracteres.
+        </div>
+      </div>
+
+      <!-- Especialidades -->
+      <div class="col-span-2">
+        <label for="expertise" class="block text-sm font-medium text-gray-700 mb-1">
+          Especialidades * <span class="text-gray-500 text-sm">(separadas por vírgula)</span>
+        </label>
+        <input
+          id="expertise"
+          type="text"
+          formControlName="expertise"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Especialidade 1, Especialidade 2, etc."
+        />
+        <div *ngIf="consultantForm.get('expertise')?.invalid && consultantForm.get('expertise')?.touched" class="text-red-500 text-sm mt-1">
+          As especialidades são obrigatórias.
+        </div>
+      </div>
+
+      <!-- Localização -->
+      <div>
+        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Localização *</label>
+        <input
+          id="location"
+          type="text"
+          formControlName="location"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Cidade, Estado"
+        />
+        <div *ngIf="consultantForm.get('location')?.invalid && consultantForm.get('location')?.touched" class="text-red-500 text-sm mt-1">
+          A localização é obrigatória e deve ter pelo menos 5 caracteres.
+        </div>
+      </div>
+
+      <!-- Classificação -->
+      <div>
+        <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Classificação (0-5) *</label>
+        <input
+          id="rating"
+          type="number"
+          formControlName="rating"
+          min="0"
+          max="5"
+          step="0.1"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="0.0 - 5.0"
+        />
+        <div *ngIf="consultantForm.get('rating')?.invalid && consultantForm.get('rating')?.touched" class="text-red-500 text-sm mt-1">
+          A classificação deve ser entre 0 e 5.
+        </div>
+      </div>
+
+      <!-- Experiência -->
+      <div>
+        <label for="experience" class="block text-sm font-medium text-gray-700 mb-1">Experiência *</label>
+        <input
+          id="experience"
+          type="text"
+          formControlName="experience"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Tempo de experiência"
+        />
+        <div *ngIf="consultantForm.get('experience')?.invalid && consultantForm.get('experience')?.touched" class="text-red-500 text-sm mt-1">
+          A experiência é obrigatória e deve ter pelo menos 3 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 pt-6">
+      <button
+        type="submit"
+        [disabled]="consultantForm.invalid"
+        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {{ isEditMode ? 'Atualizar Consultor' : 'Adicionar Consultor' }}
+      </button>
+      
+      <button
+        type="button"
+        (click)="onCancel()"
+        class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

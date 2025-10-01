@@ -1,10 +1,11 @@
 <div class="border border-gray-200 rounded-lg shadow-lg p-6 bg-white space-y-4 w-full hover:shadow-xl transition-shadow duration-300">
   <div class="flex items-center space-x-4 mb-4">
-    <img
-      [src]="consultant.image"
-      alt="{{ consultant.name }}"
-      class="w-16 h-16 rounded-full object-cover"
-    />
+    <!-- Substituímos a imagem por uma div com iniciais do nome -->
+    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+      <span class="text-xl font-bold text-blue-800">
+        {{ consultant.name.charAt(0) }}
+      </span>
+    </div>
     <div class="flex-1 min-w-0">
       <h3 class="font-semibold text-foreground text-lg mb-1 text-balance">{{ consultant.name }}</h3>
       <p class="text-sm text-muted-foreground mb-2">{{ consultant.title }}</p>
@@ -12,6 +13,24 @@
         <lucide-angular [img]="MapPin" class=""></lucide-angular>
         {{ consultant.location }}
       </div>
+    </div>
+    
+    <!-- Botões de ação para administradores -->
+    <div *ngIf="showActions" class="flex space-x-2">
+      <button 
+        (click)="onEdit()" 
+        class="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-100"
+        title="Editar consultor"
+      >
+        <lucide-angular [img]="Edit3" class="size-4"></lucide-angular>
+      </button>
+      <button 
+        (click)="onDelete()" 
+        class="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-100"
+        title="Excluir consultor"
+      >
+        <lucide-angular [img]="Trash2" class="size-4"></lucide-angular>
+      </button>
     </div>
   </div>
   <p class="text-sm text-card-foreground mb-4 leading-relaxed max-w-[350px] line-clamp-2">

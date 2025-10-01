@@ -1,8 +1,61 @@
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <div class="flex-shrink-0 flex items-center">
+          <span class="font-bold text-xl text-blue-600">Galeria de Consultores</span>
+        </div>
+        <nav class="ml-6 flex space-x-8">
+          <a 
+            routerLink="/consultants" 
+            routerLinkActive="bg-gray-100 text-gray-900" 
+            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+          >
+            Consultores
+          </a>
+          <a 
+            routerLink="/about" 
+            routerLinkActive="bg-gray-100 text-gray-900" 
+            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+          >
+            Sobre
+          </a>
+          <ng-container *ngIf="authService.hasAdminProfile()">
+            <a 
+              routerLink="/consultant-form" 
+              routerLinkActive="bg-gray-100 text-gray-900" 
+              class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Adicionar Consultor
+            </a>
+          </ng-container>
+        </nav>
+      </div>
+      <div class="flex items-center">
+        <ng-container *ngIf="authService.isAuthenticated(); else loginButton">
+          <span class="mr-4 text-sm text-gray-700">Bem-vindo, {{ authService.getCurrentUser()?.profile === 'admin' ? 'Administrador' : 'Usuário' }}!</span>
+          <button 
+            (click)="logout()"
+            class="ml-4 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Sair
+          </button>
+        </ng-container>
+        <ng-template #loginButton>
+          <a 
+            routerLink="/login" 
+            class="ml-4 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Login
+          </a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</header>
+
 <main class="w-full min-h-screen bg-background">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-2">{{ title() }}</h1>
-    <p class="text-base text-gray-600 mb-4">{{ description() }}</p>
-    <hr class="my-4 mb-8">
-    <app-consultant-list></app-consultant-list>
+  <div class="container mx-auto">
+    <router-outlet></router-outlet>
   </div>
 </main>

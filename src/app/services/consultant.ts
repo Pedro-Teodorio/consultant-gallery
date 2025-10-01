@@ -14,7 +14,6 @@ export class ConsultantService {
       expertise: ['Cloud Computing', 'DevOps', 'Arquitetura de Software'],
       location: 'São Paulo, SP',
       rating: 4.9,
-      image: 'https://i.pravatar.cc/150?img=32',
       experience: '8+ anos',
     },
     {
@@ -25,7 +24,6 @@ export class ConsultantService {
       expertise: ['Cibersegurança', 'Compliance', 'Gestão de Riscos'],
       location: 'Rio de Janeiro, RJ',
       rating: 4.8,
-      image: 'https://i.pravatar.cc/150?img=52',
       experience: '10+ anos',
     },
     {
@@ -36,7 +34,6 @@ export class ConsultantService {
       expertise: ['Data Science', 'Machine Learning', 'Analytics'],
       location: 'Belo Horizonte, MG',
       rating: 4.9,
-      image: 'https://i.pravatar.cc/150?img=31',
       experience: '6+ anos',
     },
     {
@@ -47,7 +44,6 @@ export class ConsultantService {
       expertise: ['Arquitetura de Software', 'Microserviços', 'Modernização'],
       location: 'Brasília, DF',
       rating: 4.7,
-      image: 'https://i.pravatar.cc/150?img=12',
       experience: '12+ anos',
     },
     {
@@ -58,7 +54,6 @@ export class ConsultantService {
       expertise: ['DevOps', 'Automação', 'CI/CD'],
       location: 'Porto Alegre, RS',
       rating: 4.8,
-      image: 'https://i.pravatar.cc/150?img=26',
       experience: '7+ anos',
     },
     {
@@ -69,7 +64,6 @@ export class ConsultantService {
       expertise: ['Blockchain', 'Criptomoedas', 'Web3'],
       location: 'Florianópolis, SC',
       rating: 4.6,
-      image: 'https://i.pravatar.cc/150?img=54',
       experience: '5+ anos',
     },
   ];
@@ -82,8 +76,40 @@ export class ConsultantService {
     return this.consultants.filter((consultant) => consultant.expertise.includes(filter));
   }
 
+  getConsultantById(id: number): Consultant | undefined {
+    return this.consultants.find(consultant => consultant.id === id);
+  }
+
   getExpertise(): string[] {
     const expertise = this.consultants.flatMap((c) => c.expertise);
     return ['Todas', ...new Set(expertise)];
+  }
+
+  addConsultant(consultant: Consultant): void {
+    // Verifica se já existe um consultor com o mesmo ID
+    const existingConsultant = this.consultants.find(c => c.id === consultant.id);
+    if (existingConsultant) {
+      throw new Error(`Consultor com ID ${consultant.id} já existe.`);
+    }
+    
+    this.consultants.push(consultant);
+  }
+
+  updateConsultant(updatedConsultant: Consultant): void {
+    const index = this.consultants.findIndex(c => c.id === updatedConsultant.id);
+    if (index !== -1) {
+      this.consultants[index] = updatedConsultant;
+    } else {
+      throw new Error(`Consultor com ID ${updatedConsultant.id} não encontrado.`);
+    }
+  }
+
+  deleteConsultant(id: number): void {
+    const index = this.consultants.findIndex(c => c.id === id);
+    if (index !== -1) {
+      this.consultants.splice(index, 1);
+    } else {
+      throw new Error(`Consultor com ID ${id} não encontrado.`);
+    }
   }
 }

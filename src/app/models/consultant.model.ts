@@ -6,6 +6,5 @@ export interface Consultant {
   expertise: string[]
   location: string
   rating: number
-  image: string
   experience: string
 }

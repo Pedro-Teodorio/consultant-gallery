@@ -1,12 +1,29 @@
-<div class="flex flex-col gap-4">
-  <app-filter-toolbar
-    (selectedExpertiseChange)="onFilterExpertiseChange($event)"
-    [expertise]="expertiseList"
-  ></app-filter-toolbar>
+<div class="flex flex-col gap-4 mt-8">
+  <div class="flex justify-between items-center mb-4">
+    <app-filter-toolbar
+      (selectedExpertiseChange)="onFilterExpertiseChange($event)"
+      [expertise]="expertiseList"
+    ></app-filter-toolbar>
+
+    <div *ngIf="authService.hasAdminProfile()" class="flex justify-end ">
+      <button
+        (click)="navigateToAddConsultant()"
+        class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      >
+        Adicionar Consultor
+      </button>
+    </div>
+  </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @for (item of filteredConsultants; track $index) {
-    <app-consultant-card [consultant]="item"></app-consultant-card>
+    <app-consultant-card
+      [consultant]="item"
+      [showActions]="authService.hasAdminProfile()"
+      (editConsultant)="editConsultant($event)"
+      (deleteConsultant)="deleteConsultant($event)"
+    >
+    </app-consultant-card>
     }
   </div>
 </div>
